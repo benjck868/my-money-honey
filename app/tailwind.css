@@ -4,9 +4,7 @@
 
 html,
 body {
-  @apply bg-white dark:bg-gray-950;
-
-  @media (prefers-color-scheme: dark) {
-    color-scheme: dark;
-  }
+    .input-text {
+        @apply block w-full rounded-md border-gray-300 shadow-slate-200 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2 mr-2
+    }
 }
