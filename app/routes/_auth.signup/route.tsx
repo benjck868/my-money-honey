@@ -38,6 +38,7 @@ export async function action({request}:ActionFunctionArgs){
             name : name,
             password: hashedPassword,
             image: "default",
+            strategy: "form"
         },select: {
             id:true
         }})

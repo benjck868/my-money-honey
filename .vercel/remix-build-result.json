@@ -10,7 +10,9 @@
       }
     },
     "routeIdToServerBundleId": {
+      "routes/auth.google.callback": "nodejs-eyJydW50aW1lIjoibm9kZWpzIn0",
       "routes/_auth.signup": "nodejs-eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/auth.google": "nodejs-eyJydW50aW1lIjoibm9kZWpzIn0",
       "routes/_auth.login": "nodejs-eyJydW50aW1lIjoibm9kZWpzIn0",
       "routes/_index": "nodejs-eyJydW50aW1lIjoibm9kZWpzIn0",
       "routes/home": "nodejs-eyJydW50aW1lIjoibm9kZWpzIn0"
@@ -22,11 +24,29 @@
         "file": "app/root.tsx",
         "config": {}
       },
+      "routes/auth.google.callback": {
+        "file": "app/routes/auth.google.callback.ts",
+        "id": "routes/auth.google.callback",
+        "path": "callback",
+        "parentId": "routes/auth.google",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
       "routes/_auth.signup": {
         "file": "app/routes/_auth.signup/route.tsx",
         "id": "routes/_auth.signup",
         "path": "signup",
         "parentId": "routes/_auth",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "routes/auth.google": {
+        "file": "app/routes/auth.google.ts",
+        "id": "routes/auth.google",
+        "path": "auth/google",
+        "parentId": "root",
         "config": {
           "runtime": "nodejs"
         }
@@ -86,11 +106,23 @@
         "id": "root",
         "file": "root.tsx"
       },
+      "routes/auth.google.callback": {
+        "file": "routes/auth.google.callback.ts",
+        "id": "routes/auth.google.callback",
+        "path": "callback",
+        "parentId": "routes/auth.google"
+      },
       "routes/_auth.signup": {
         "file": "routes/_auth.signup/route.tsx",
         "id": "routes/_auth.signup",
         "path": "signup",
         "parentId": "routes/_auth"
+      },
+      "routes/auth.google": {
+        "file": "routes/auth.google.ts",
+        "id": "routes/auth.google",
+        "path": "auth/google",
+        "parentId": "root"
       },
       "routes/_auth.login": {
         "file": "routes/_auth.login/route.tsx",

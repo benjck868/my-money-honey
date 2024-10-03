@@ -1,5 +1,5 @@
 import { ActionFunctionArgs, LoaderFunctionArgs } from '@remix-run/node'
-import { Form, json, Link, useLoaderData, useRouteError } from '@remix-run/react'
+import { Form, json, Link, useLoaderData, useNavigation, useRouteError } from '@remix-run/react'
 import { useFormik } from 'formik'
 import { useEffect, useState } from 'react'
 import { z } from 'zod'
@@ -42,6 +42,7 @@ export async function loader({request}:LoaderFunctionArgs){
 
 export default function route() {
     const error = useLoaderData<typeof loader>()
+    const navigation = useNavigation()
     const [loginErrorMessage, setLoginErrorMessage] = useState("")
     
     const formik = useFormik({
@@ -74,20 +75,17 @@ export default function route() {
                 </div>
                 <button type="submit"
                         className="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                    Sign In
+                    {navigation.state === "submitting" ? "validating credentials....": "Sign In"}
                 </button>
 
                 <div className="mt-6 text-center">
                     <p className="text-gray-500">Or sign in with:</p>
                     <div className="flex justify-center mt-3 space-x-4">
-                        <a href="#"
-                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                            <i className="fab fa-facebook-f"></i> Facebook
-                        </a>
-                        <a href="#"
-                        className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                            <i className="fab fa-google"></i> Google
-                        </a>
+                        <Form action="/auth/google" method="POST" className="w-full">
+                            <button type="submit" className="bg-red-500 hover:bg-red-700 text-white font-bold w-full py-3 rounded focus:outline-none focus:shadow-outline w-">
+                                Login with Google SHiT
+                            </button>
+                        </Form>
                     </div>
                 </div>
             </Form>
