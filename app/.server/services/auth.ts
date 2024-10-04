@@ -5,10 +5,6 @@ import prisma from "../utils/db/prisma";
 import bcrypt from 'bcryptjs'
 import { GoogleStrategy } from "remix-auth-google";
 
-<<<<<<< HEAD
-=======
-const app_url = "https://my-money-honey.vercel.app"
->>>>>>> 943e2c5f2572dc887dedb70f0887e880cc159e22
 // Create an instance of the authenticator, pass a generic with what
 // strategies will return and will store in the session
 export let authenticator = new Authenticator<User| AuthorizationError>(sessionStorage,{
