@@ -13,15 +13,12 @@ export default function Navbar() {
     console.log(JSON.stringify(dashboard))
   },[sidebarStatus,themeStatus])
   return (
-    <header className="bg-white p-4 mb-4 flex justify-between">
+    <header className="bg-white p-4 mb-2 flex justify-between">
       <div className="block lg:hidden">
         <Sheets />
       </div>
       <div className="flex items-center justify-between">
-        <h1 className="text-xl font-bold">Welcome, John Doe</h1>
         <div className="flex items-center">
-          <img src="https://via.placeholder.com/32" alt="Profile" className="rounded-full mr-2" />
-          <span className="text-gray-600">John Doe</span>
           <Form method="POST">
             <Button type="submit">Log Out</Button>
           </Form>

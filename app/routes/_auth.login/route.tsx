@@ -1,11 +1,13 @@
 import { ActionFunctionArgs, LoaderFunctionArgs } from '@remix-run/node'
 import { Form, json, Link, useLoaderData, useNavigation, useRouteError } from '@remix-run/react'
 import { useFormik } from 'formik'
+import { Loader2 } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { z } from 'zod'
 import { toFormikValidationSchema } from 'zod-formik-adapter'
 import { authenticator } from '~/.server/services/auth'
 import { commitSession, sessionStorage } from '~/.server/services/session'
+import { Button } from '~/components/ui/button'
 
 export const CredentialSchema = z.object({
     email: z.string({required_error:"Email field is required."}).email(),
@@ -24,9 +26,6 @@ export async function action({request, context}:ActionFunctionArgs) {
 }
 
 export async function loader({request}:LoaderFunctionArgs){
-    await authenticator.isAuthenticated(request, {
-        successRedirect : "/"
-    });
 
     const session = await sessionStorage.getSession(
         request.headers.get("Cookie")
@@ -73,18 +72,19 @@ export default function route() {
                     <input type="password" id="password" name="password" className="input-text" value={formik.values.password} onChange={formik.handleChange} onBlur={formik.handleBlur} required/>
                     <div className='text-xs text-red-300'>{formik.errors.password&&formik.touched.password&&formik.errors.password}</div>
                 </div>
-                <button type="submit"
+                <Button type="submit"
                         className="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                    {navigation.state === "submitting" ? "validating credentials....": "Sign In"}
-                </button>
+                    {navigation.state === "submitting" && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                    Sign in
+                </Button>
 
                 <div className="mt-6 text-center">
                     <p className="text-gray-500">Or sign in with:</p>
                     <div className="flex justify-center mt-3 space-x-4">
                         <Form action="/auth/google" method="POST" className="w-full">
-                            <button type="submit" className="bg-red-500 hover:bg-red-700 text-white font-bold w-full py-3 rounded focus:outline-none focus:shadow-outline w-">
-                                Login with Google SHiT
-                            </button>
+                            <Button type="submit" className="bg-red-500 hover:bg-red-700 text-white font-bold w-full py-3 rounded focus:outline-none focus:shadow-outline w-">
+                                Login with Google
+                            </Button>
                         </Form>
                     </div>
                 </div>

@@ -11,11 +11,12 @@
     },
     "routeIdToServerBundleId": {
       "routes/auth.google.callback": "nodejs-eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/home.expenses": "nodejs-eyJydW50aW1lIjoibm9kZWpzIn0",
       "routes/_auth.signup": "nodejs-eyJydW50aW1lIjoibm9kZWpzIn0",
       "routes/auth.google": "nodejs-eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/home._index": "nodejs-eyJydW50aW1lIjoibm9kZWpzIn0",
       "routes/_auth.login": "nodejs-eyJydW50aW1lIjoibm9kZWpzIn0",
-      "routes/_index": "nodejs-eyJydW50aW1lIjoibm9kZWpzIn0",
-      "routes/home": "nodejs-eyJydW50aW1lIjoibm9kZWpzIn0"
+      "routes/_index": "nodejs-eyJydW50aW1lIjoibm9kZWpzIn0"
     },
     "routes": {
       "root": {
@@ -29,6 +30,15 @@
         "id": "routes/auth.google.callback",
         "path": "callback",
         "parentId": "routes/auth.google",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "routes/home.expenses": {
+        "file": "app/routes/home.expenses/route.tsx",
+        "id": "routes/home.expenses",
+        "path": "expenses",
+        "parentId": "routes/home",
         "config": {
           "runtime": "nodejs"
         }
@@ -47,6 +57,15 @@
         "id": "routes/auth.google",
         "path": "auth/google",
         "parentId": "root",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "routes/home._index": {
+        "file": "app/routes/home._index/route.tsx",
+        "id": "routes/home._index",
+        "index": true,
+        "parentId": "routes/home",
         "config": {
           "runtime": "nodejs"
         }
@@ -80,9 +99,7 @@
         "id": "routes/home",
         "path": "home",
         "parentId": "root",
-        "config": {
-          "runtime": "nodejs"
-        }
+        "config": {}
       }
     }
   },
@@ -112,6 +129,12 @@
         "path": "callback",
         "parentId": "routes/auth.google"
       },
+      "routes/home.expenses": {
+        "file": "routes/home.expenses/route.tsx",
+        "id": "routes/home.expenses",
+        "path": "expenses",
+        "parentId": "routes/home"
+      },
       "routes/_auth.signup": {
         "file": "routes/_auth.signup/route.tsx",
         "id": "routes/_auth.signup",
@@ -123,6 +146,12 @@
         "id": "routes/auth.google",
         "path": "auth/google",
         "parentId": "root"
+      },
+      "routes/home._index": {
+        "file": "routes/home._index/route.tsx",
+        "id": "routes/home._index",
+        "index": true,
+        "parentId": "routes/home"
       },
       "routes/_auth.login": {
         "file": "routes/_auth.login/route.tsx",

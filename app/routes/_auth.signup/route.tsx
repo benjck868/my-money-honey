@@ -1,4 +1,4 @@
-import { ActionFunctionArgs } from '@remix-run/node'
+import { ActionFunctionArgs, LoaderFunctionArgs } from '@remix-run/node'
 import { Form, isRouteErrorResponse, Link, useActionData, useFetcher, useFormAction, useNavigation, useRouteError, useSubmit } from '@remix-run/react'
 import { useFormik } from 'formik'
 import { useEffect, useState } from 'react'
@@ -6,6 +6,8 @@ import { z } from 'zod'
 import { toFormikValidationSchema } from 'zod-formik-adapter'
 import bcrypt from 'bcryptjs'
 import prisma from '~/.server/utils/db/prisma'
+import { Button } from '~/components/ui/button'
+import { Loader2 } from 'lucide-react'
 
 const SignupSchema = z.object({
     email: z.string({required_error:"Email is require."}).email(),
@@ -51,7 +53,6 @@ export async function action({request}:ActionFunctionArgs){
     }
     
 }
-
 export default function route() {
     const [errorMessage,setErrorMessage] = useState("")
     const navigation = useNavigation()
@@ -77,6 +78,13 @@ export default function route() {
             
         }
     },[actionData])
+    if(actionData){
+        return(
+            <div>
+                <Link className="hover:underline" to="/login">Please login to your new account.</Link>
+            </div>
+        )
+    }
   return (
     <div className="bg-white shadow-none md:shadow-md rounded-none md:rounded-lg p-6 w-96">
         <h2 className="text-2xl font-bold mb-4 text-center">Sign Up</h2>
@@ -101,9 +109,9 @@ export default function route() {
                 <input type="password" id="confirmPassword" onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.confirmPassword} name="confirmPassword" className="input-text" required autoComplete='off' />
                 <div className='text-xs text-red-300'>{formik.errors.confirmPassword&&formik.touched.confirmPassword&&formik.errors.confirmPassword}</div>
             </div>
-            <button type="submit" className="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                {navigation.state === "submitting"? "loading...": "Sign Up"}
-            </button>
+            <Button type="submit" className="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                {navigation.state === "submitting" && <Loader2 className="mr-2 h-4 w-4 animate-spin" />} Sign up
+            </Button>
         </Form>
         <div className="text-red-400 text-xs pt-5">
             {errorMessage}
