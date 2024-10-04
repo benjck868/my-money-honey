@@ -5,7 +5,10 @@ import prisma from "../utils/db/prisma";
 import bcrypt from 'bcryptjs'
 import { GoogleStrategy } from "remix-auth-google";
 
+<<<<<<< HEAD
+=======
 const app_url = "https://my-money-honey.vercel.app"
+>>>>>>> 943e2c5f2572dc887dedb70f0887e880cc159e22
 // Create an instance of the authenticator, pass a generic with what
 // strategies will return and will store in the session
 export let authenticator = new Authenticator<User| AuthorizationError>(sessionStorage,{
@@ -40,7 +43,7 @@ let googleStrategy = new GoogleStrategy(
   {
     clientID: process.env.GOOGLE_CLIENT_ID!,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-    callbackURL: `${app_url}/auth/google/callback`,
+    callbackURL: `/auth/google/callback`,
   },
   async ({ accessToken, refreshToken, extraParams, profile }) => {
     // Get the user data from your DB or API using the tokens and profile
