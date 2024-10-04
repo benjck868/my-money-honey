@@ -5,12 +5,7 @@ import prisma from "../utils/db/prisma";
 import bcrypt from 'bcryptjs'
 import { GoogleStrategy } from "remix-auth-google";
 
-const node_env = process.env.NODE_ENV_MONEY_HONEY!
-let app_url = ""
-if(node_env === "production"){
-  app_url = process.env.APP_URL!
-}
-app_url = "http://localhost:5173"
+const app_url = "https://my-money-honey.vercel.app"
 // Create an instance of the authenticator, pass a generic with what
 // strategies will return and will store in the session
 export let authenticator = new Authenticator<User| AuthorizationError>(sessionStorage,{
