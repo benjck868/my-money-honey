@@ -5,7 +5,7 @@ import prisma from "../utils/db/prisma";
 import bcrypt from 'bcryptjs'
 import { GoogleStrategy } from "remix-auth-google";
 
-const node_env = process.env.NODE_ENV!
+const node_env = process.env.NODE_ENV_MONEY_HONEY!
 let app_url = ""
 if(node_env === "production"){
   app_url = process.env.APP_URL!
