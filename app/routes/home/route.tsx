@@ -23,12 +23,14 @@ export default function route() {
     const dashboard = useContext(DashboardContext)
     const sidebarStatus = dashboard&&dashboard.state.sidebar
     return (
-      <div className="flex min-h-svh font-sans relative">
+      <div className="flex min-h-svh bg-background text-foreground font-sans relative">
+        <Navbar />
+        <main className="w-full min-h-full">
         <Sidebar />
-        <main className="bg-slate-500 w-full min-h-full flex flex-col lg:ml-64">
-          <Navbar />
-          <div className="lg:px-2">
-            <Outlet />
+          <div className="p-2 flex lg:ml-64 min-h-full">
+            <div className="mt-16 min-w-full min-h-full overflow-x-hidden">
+              <Outlet />
+            </div>
           </div>
         </main>
       </div>

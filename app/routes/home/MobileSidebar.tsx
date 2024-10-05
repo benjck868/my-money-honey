@@ -1,72 +1,73 @@
-import * as VisuallyHidden from "@radix-ui/react-visually-hidden"
-import { Menu } from "lucide-react"
+import { useState } from "react"
 import { Button } from "~/components/ui/button"
-import {
-  Sheet,
-  SheetClose,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "~/components/ui/sheet"
-import { BarChart3, HandCoinsIcon, SettingsIcon, ShoppingCartIcon, UsersIcon } from "lucide-react";
-import { Link } from "@remix-run/react";
+import { ScrollArea } from "~/components/ui/scroll-area"
+import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle, SheetDescription } from "~/components/ui/sheet"
+import { Menu, X } from "lucide-react"
+import { VisuallyHidden } from "node_modules/@radix-ui/react-visually-hidden/dist"
 
-export default function Sheets() {
+export default function Component() {
+  const [open, setOpen] = useState(false)
+
+  const menuItems = [
+    { name: "Home", href: "#" },
+    { name: "Dashboard", href: "#" },
+    { name: "Projects", href: "#" },
+    { name: "Tasks", href: "#" },
+    { name: "Reporting", href: "#" },
+    { name: "Users", href: "#" },
+    { name: "Messages", href: "#" },
+    { name: "Files", href: "#" },
+    { name: "Calendar", href: "#" },
+    { name: "Settings", href: "#" },
+    { name: "Help & Support", href: "#" },
+    { name: "Billing", href: "#" },
+    { name: "Integrations", href: "#" },
+    { name: "API", href: "#" },
+    { name: "Documentation", href: "#" },
+  ]
+
   return (
-    <Sheet>
+    <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
-        <Button size="icon">
-          <Menu />
+        <Button variant="outline" size="icon" className="fixed top-4 left-4 z-40">
+          <Menu className="h-4 w-4" />
+          <span className="sr-only">Toggle menu</span>
         </Button>
       </SheetTrigger>
-      <SheetContent side="left" className="w-64 px-0 pt-0 border-none">
-        <VisuallyHidden.Root>
+      <SheetContent side="left" className="w-[300px] p-0">
+        <VisuallyHidden>
           <SheetHeader>
-          <SheetTitle>Sidebar menu</SheetTitle>
-          <SheetDescription>
-            Please select sidebar menu
-          </SheetDescription>
-        </SheetHeader>
-        </VisuallyHidden.Root>
-        <div>
-          <div className="h-16 flex items-center justify-center mb-2">
-            <h2 className="text-2xl font-semibold text-gray-800 dark:text-white">MONEY HONEY</h2>
-        </div>
-        <ul>
-            <SheetClose asChild>
-                <Link to="/home" className="flex items-center space-x-4">
-                    <li className="flex items-center p-6 gap-5 hover:bg-gray-100 dark:hover:bg-gray-700 w-full">
-                        <BarChart3 className="h-5 w-5 text-gray-500 dark:text-gray-400" />
-                        <span className="text-sm font-medium">Dashboard</span>
-                    </li>
-                </Link>
-            </SheetClose>
-            <SheetClose asChild>
-                <Link to="/home/expenses" className="flex items-center space-x-4">
-                    <li className="flex items-center p-6 gap-5 hover:bg-gray-100 w-full dark:hover:bg-gray-700">
-                        <HandCoinsIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
-                        <span className="text-sm font-medium">Expenses</span>
-                    </li>
-                </Link>
-            </SheetClose>
-            
-            <Link to="#" className="flex items-center space-x-4">
-                <li className="flex items-center p-6 gap-5 hover:bg-gray-100 w-full dark:hover:bg-gray-700">
-                    
-                    <ShoppingCartIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
-                    <span className="text-sm font-medium">Orders</span>
-                    
-                </li>
-            </Link>
-            <Link to="#" className="flex items-center space-x-4">
-                <li className="flex items-center p-6 gap-5 w-full hover:bg-gray-100 dark:hover:bg-gray-700">                    
-                    <SettingsIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
-                    <span className="text-sm font-medium">Settings</span>                    
-                </li>
-            </Link>
-        </ul>
+            <SheetTitle>
+              SideBar Menu
+            </SheetTitle>
+            <SheetDescription>
+              This menu use sheet component of shadcn
+            </SheetDescription>
+          </SheetHeader>
+        </VisuallyHidden>
+        <div className="flex flex-col h-full">
+          <div className="flex items-center justify-between px-4 h-16 border-b">
+            <h2 className="text-lg font-semibold">Menu</h2>
+          </div>
+          <ScrollArea className="flex-1 px-4">
+            <nav className="flex flex-col gap-2 py-4">
+              {menuItems.map((item) => (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  className="flex items-center gap-2 px-3 py-2 rounded-md text-sm hover:bg-muted transition-colors"
+                  onClick={() => setOpen(false)}
+                >
+                  {item.name}
+                </a>
+              ))}
+            </nav>
+          </ScrollArea>
+          <div className="border-t p-4">
+            <p className="text-sm text-muted-foreground">
+              Logged in as <strong>user@example.com</strong>
+            </p>
+          </div>
         </div>
       </SheetContent>
     </Sheet>

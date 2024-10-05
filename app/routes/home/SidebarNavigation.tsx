@@ -1,45 +1,56 @@
-import { Link } from "@remix-run/react";
-import { BarChart3, HandCoinsIcon, SettingsIcon, ShoppingCartIcon, UsersIcon } from "lucide-react";
+import { Link } from "@remix-run/react"
+import { HandCoinsIcon, HomeIcon, LucideProps } from "lucide-react"
+import { ReactNode } from "react"
+import { ScrollArea } from "~/components/ui/scroll-area"
+
+type MenuItemProps = {
+  name: string,
+  href: string,
+  icon?: ReactNode
+}
+ export const menuItems:MenuItemProps[] = [
+    { name: "Home", href: "/home", icon:<HomeIcon />},
+    { name: "Expenses", href: "/home/expenses" , icon: <HandCoinsIcon /> },
+    { name: "Projects", href: "#" },
+    { name: "Tasks", href: "#" },
+    { name: "Reporting", href: "#" },
+    { name: "Users", href: "#" },
+    { name: "Messages", href: "#" },
+    { name: "Files", href: "#" },
+    { name: "Calendar", href: "#" },
+    { name: "Settings", href: "#" },
+    { name: "Help & Support", href: "#" },
+    { name: "Billing", href: "#" },
+    { name: "Integrations", href: "#" },
+    { name: "API", href: "#" },
+    { name: "Documentation", href: "#" },
+    
+  ]
 
 export default function SidebarNavigation() {
   return (
     <>
-        <div className="h-16 flex items-center justify-center mb-2">
-                <h2 className="text-2xl font-semibold text-gray-800 dark:text-white">MONEY HONEY</h2>
-            </div>
-            <ul>
-                
-                <Link to="/home" className="flex items-center space-x-4">
-                    <li className="flex items-center p-6 gap-5 hover:bg-gray-100 dark:hover:bg-gray-700 w-full">
-                    
-                        <BarChart3 className="h-5 w-5 text-gray-500 dark:text-gray-400" />
-                        <span className="text-sm font-medium">Dashboard</span>
-                    
-                    </li>
+    <div className="flex flex-col h-full border-r">
+          <ScrollArea className="flex-1 px-4 mt-16">
+            <nav className="flex flex-col gap-2 py-4">
+              {menuItems.map(({name, href, icon},index) => (
+                <Link
+                  key={index}
+                  to={href}
+                  className="flex items-center gap-2 px-3 py-2 rounded-md text-sm hover:bg-muted transition-colors"
+                >
+                  {icon&&icon}
+                  {name}
                 </Link>
-                <Link to="/home/expenses" className="flex items-center space-x-4">
-                    <li className="flex items-center p-6 gap-5 hover:bg-gray-100 w-full dark:hover:bg-gray-700">
-                        
-                        <HandCoinsIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
-                        <span className="text-sm font-medium">Expenses</span>
-                        
-                    </li>
-                </Link>
-                <Link to="#" className="flex items-center space-x-4">
-                    <li className="flex items-center p-6 gap-5 hover:bg-gray-100 w-full dark:hover:bg-gray-700">
-                        
-                        <ShoppingCartIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
-                        <span className="text-sm font-medium">Orders</span>
-                        
-                    </li>
-                </Link>
-                <Link to="#" className="flex items-center space-x-4">
-                    <li className="flex items-center p-6 gap-5 w-full hover:bg-gray-100 dark:hover:bg-gray-700">                    
-                        <SettingsIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
-                        <span className="text-sm font-medium">Settings</span>                    
-                    </li>
-                </Link>
-            </ul>
+              ))}
+            </nav>
+          </ScrollArea>
+          <div className="border-t p-4">
+            <p className="text-sm text-muted-foreground">
+              Logged in as <strong>user@example.com</strong>
+            </p>
+          </div>
+        </div>
     </>
   )
 }
